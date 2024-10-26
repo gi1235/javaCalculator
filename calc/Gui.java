@@ -3,6 +3,7 @@ import javax.swing.*;
 
 
 public class Gui extends JFrame{
+    Font fontTest = new Font("Simsun 보통", Font.PLAIN, 25);
     Gui(){
         setTitle("계산기");
         setSize(500,600);
@@ -57,17 +58,30 @@ public class Gui extends JFrame{
         backSpace.setBackground(Color.lightGray);
         panel.add(backSpace);
 
+        JButton reciprocal = new JButton("1/x");
+        reciprocal.setBackground(Color.lightGray);
+        panel.add(reciprocal);
+
+        JButton squared = new JButton("x^2");
+        squared.setBackground(Color.lightGray);
+        panel.add(squared);
+
+        JButton root = new JButton("√x");
+        root.setBackground(Color.lightGray);
+        panel.add(root);
+
+        JButton division = new JButton("÷");
+        division.setBackground(Color.lightGray);
+        panel.add(division);
+
         JButton n7 = new JButton("7");
-        n7.setBackground(Color.white);
-        panel.add(n7);
+        panel.add(setWhite(n7));
 
         JButton n8 = new JButton("8");
-        n8.setBackground(Color.white);
-        panel.add(n8);
+        panel.add(setWhite(n8));
 
         JButton n9 = new JButton("9");
-        n9.setBackground(Color.white);
-        panel.add(n9);
+        panel.add(setWhite(n9));
 
         JButton multiply = new JButton("X");
         multiply.setBackground(Color.lightGray);
@@ -80,48 +94,39 @@ public class Gui extends JFrame{
         JPanel panel = new JPanel(new GridLayout(0,4,2,2));
         panel.setBackground(Color.lightGray);
         JButton n4= new JButton("4");
-        n4.setBackground(Color.white);
-        panel.add(n4);
+        panel.add(setWhite(n4));
 
         JButton n5 = new JButton("5");
-        n5.setBackground(Color.white);
-        panel.add(n5);
+        panel.add(setWhite(n5));
 
         JButton n6 = new JButton("6");
-        n6.setBackground(Color.white);
-        panel.add(n6);
+        panel.add(setWhite(n6));
 
         JButton minus = new JButton("-");
         minus.setBackground(Color.lightGray);
         panel.add(minus);
 
         JButton n1 = new JButton("1");
-        n1.setBackground(Color.white);
-        panel.add(n1);
+        panel.add(setWhite(n1));
 
         JButton n2 = new JButton("2");
-        n2.setBackground(Color.white);
-        panel.add(n2);
+        panel.add(setWhite(n2));
 
         JButton n3 = new JButton("3");
-        n3.setBackground(Color.white);
-        panel.add(n3);
+        panel.add(setWhite(n3));
 
         JButton plus = new JButton("+");
         plus.setBackground(Color.lightGray);
         panel.add(plus);
 
         JButton plusMinus = new JButton("±");
-        plusMinus.setBackground(Color.white);
-        panel.add(plusMinus);
+        panel.add(setWhite(plusMinus));
 
         JButton n0 = new JButton("0");
-        n0.setBackground(Color.white);
-        panel.add(n0);
+        panel.add(setWhite(n0));
 
         JButton dot = new JButton(".");
-        dot.setBackground(Color.white);
-        panel.add(dot);
+        panel.add(setWhite(dot));
 
         JButton equal = new JButton("=");
         equal.setBackground(Color.blue);
@@ -129,6 +134,13 @@ public class Gui extends JFrame{
         panel.add(equal);
 
         add(panel);
+    }
+
+
+    public JButton setWhite(JButton a){
+        a.setFont(fontTest);
+        a.setBackground(Color.white);
+        return a;
     }
 }
 
