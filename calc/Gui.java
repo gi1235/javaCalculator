@@ -1,8 +1,14 @@
 import java.awt.*;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+
 import javax.swing.*;
 
 
 public class Gui extends JFrame{
+
+    JTextArea text;
+
     Font fontTest = new Font("Simsun 보통", Font.PLAIN, 20);
     Gui(){
         setTitle("계산기");
@@ -30,7 +36,7 @@ public class Gui extends JFrame{
         panel.add(basic);
         mainPanel.add("North", panel);
 
-        JTextArea text = new JTextArea();
+        text = new JTextArea();
         text.setBackground(Color.lightGray);
         text.setEnabled(false);
         mainPanel.add(text);
@@ -109,7 +115,7 @@ public class Gui extends JFrame{
         JButton plus = new JButton("+");
         panel.add(setGray(plus));
 
-        JButton plusMinus = new JButton("±");
+        JButton plusMinus = new JButton("+/-");
         panel.add(setWhite(plusMinus));
 
         JButton n0 = new JButton("0");
@@ -138,5 +144,7 @@ public class Gui extends JFrame{
         a.setBackground(Color.lightGray);
         return a;
     }
+
+
 }
 
