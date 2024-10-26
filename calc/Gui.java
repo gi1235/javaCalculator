@@ -8,18 +8,21 @@ public class Gui extends JFrame{
         setSize(500,600);
         setLayout(new GridLayout(3,0));
 
+
         north();
         center();
         south();
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
+
     }
 
     void north(){
         JPanel mainPanel = new JPanel(new BorderLayout());
         
         JPanel panel = new JPanel();
+        panel.setBackground(Color.lightGray);
         JButton option = new JButton("설정");
         JLabel basic = new JLabel("표준");
         panel.add(option);
@@ -27,6 +30,7 @@ public class Gui extends JFrame{
         mainPanel.add("North", panel);
 
         JTextArea text = new JTextArea();
+        text.setBackground(Color.lightGray);
         text.setEnabled(false);
         mainPanel.add(text);
 
@@ -34,22 +38,23 @@ public class Gui extends JFrame{
     }
 
     void center(){
-        JPanel panel = new JPanel(new GridLayout(0,4));
+        JPanel panel = new JPanel(new GridLayout(0,4,2,2));
+        panel.setBackground(Color.lightGray);
 
         JButton persent = new JButton("%");
-        persent.setBackground(Color.LIGHT_GRAY);
+        persent.setBackground(Color.lightGray);
         panel.add(persent);
 
         JButton clearEntry = new JButton("CE");
-        clearEntry.setBackground(Color.LIGHT_GRAY);
+        clearEntry.setBackground(Color.lightGray);
         panel.add(clearEntry);
 
         JButton clear = new JButton("C");
-        clear.setBackground(Color.LIGHT_GRAY);
+        clear.setBackground(Color.lightGray);
         panel.add(clear);
 
         JButton backSpace = new JButton("Backspace");
-        backSpace.setBackground(Color.LIGHT_GRAY);
+        backSpace.setBackground(Color.lightGray);
         panel.add(backSpace);
 
         JButton n7 = new JButton("7");
@@ -65,15 +70,15 @@ public class Gui extends JFrame{
         panel.add(n9);
 
         JButton multiply = new JButton("X");
-        multiply.setBackground(Color.LIGHT_GRAY);
+        multiply.setBackground(Color.lightGray);
         panel.add(multiply);
 
         add(panel);
     }
 
     void south(){
-        JPanel panel = new JPanel(new GridLayout(0,4));
-
+        JPanel panel = new JPanel(new GridLayout(0,4,2,2));
+        panel.setBackground(Color.lightGray);
         JButton n4= new JButton("4");
         n4.setBackground(Color.white);
         panel.add(n4);
@@ -87,7 +92,7 @@ public class Gui extends JFrame{
         panel.add(n6);
 
         JButton minus = new JButton("-");
-        minus.setBackground(Color.LIGHT_GRAY);
+        minus.setBackground(Color.lightGray);
         panel.add(minus);
 
         JButton n1 = new JButton("1");
@@ -103,7 +108,7 @@ public class Gui extends JFrame{
         panel.add(n3);
 
         JButton plus = new JButton("+");
-        plus.setBackground(Color.LIGHT_GRAY);
+        plus.setBackground(Color.lightGray);
         panel.add(plus);
 
         JButton plusMinus = new JButton("±");
