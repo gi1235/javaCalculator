@@ -1,11 +1,18 @@
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-
 import javax.swing.*;
 
 
 public class Gui extends JFrame{
+    String result="";
+    ArrayList<Integer> num1 = new ArrayList<>();
+    ArrayList<Integer> num2 = new ArrayList<>();
+
+    JButton n0,n1,n2,n3,n4,n5,n6,n7,n8,n9;
+    JButton equal;
+
+    int num1Input = 0;
 
     JTextArea text;
 
@@ -38,6 +45,8 @@ public class Gui extends JFrame{
 
         text = new JTextArea();
         text.setBackground(Color.lightGray);
+        text.setFont(fontTest);
+        text.setForeground(Color.BLACK);
         text.setEnabled(false);
         mainPanel.add(text);
 
@@ -72,13 +81,13 @@ public class Gui extends JFrame{
         JButton division = new JButton("÷");
         panel.add(setGray(division));
 
-        JButton n7 = new JButton("7");
+        n7 = new JButton("7");
         panel.add(setWhite(n7));
 
-        JButton n8 = new JButton("8");
+        n8 = new JButton("8");
         panel.add(setWhite(n8));
 
-        JButton n9 = new JButton("9");
+        n9 = new JButton("9");
         panel.add(setWhite(n9));
 
         JButton multiply = new JButton("×");
@@ -91,25 +100,25 @@ public class Gui extends JFrame{
         JPanel panel = new JPanel(new GridLayout(0,4,2,2));
         panel.setBackground(Color.lightGray);
 
-        JButton n4= new JButton("4");
+        n4= new JButton("4");
         panel.add(setWhite(n4));
 
-        JButton n5 = new JButton("5");
+        n5 = new JButton("5");
         panel.add(setWhite(n5));
 
-        JButton n6 = new JButton("6");
+        n6 = new JButton("6");
         panel.add(setWhite(n6));
 
         JButton minus = new JButton("-");
         panel.add(setGray(minus));
 
-        JButton n1 = new JButton("1");
+        n1 = new JButton("1");
         panel.add(setWhite(n1));
 
-        JButton n2 = new JButton("2");
+        n2 = new JButton("2");
         panel.add(setWhite(n2));
 
-        JButton n3 = new JButton("3");
+        n3 = new JButton("3");
         panel.add(setWhite(n3));
 
         JButton plus = new JButton("+");
@@ -118,15 +127,16 @@ public class Gui extends JFrame{
         JButton plusMinus = new JButton("+/-");
         panel.add(setWhite(plusMinus));
 
-        JButton n0 = new JButton("0");
+        n0 = new JButton("0");
         panel.add(setWhite(n0));
 
         JButton dot = new JButton(".");
         panel.add(setWhite(dot));
 
-        JButton equal = new JButton("=");
+        equal = new JButton("=");
         equal.setBackground(Color.blue);
         equal.setForeground(Color.white);
+        equal.addActionListener(listenerButton);
         panel.add(equal);
 
         add(panel);
@@ -136,15 +146,48 @@ public class Gui extends JFrame{
     public JButton setWhite(JButton a){
         a.setFont(fontTest);
         a.setBackground(Color.white);
+        a.addActionListener(listenerButton);
         return a;
     }
 
     public JButton setGray(JButton a){
         a.setFont(fontTest);
         a.setBackground(Color.lightGray);
+        a.addActionListener(listenerButton);
         return a;
     }
 
+    ActionListener listenerButton = e ->{
+        Object input = e.getSource();
+
+        
+
+        if (input==equal) {
+            num1Input=1;
+            for(int i=0;i<num1.size();i++) result+=num1.get(i);
+            text.setText(result);
+        }
+
+        else if(num1Input==0){
+            String outPut="";
+            for(int i=0;i<num1.size();i++) outPut+=num1.get(i);
+            text.setText(outPut);
+            System.out.println(num1.size());
+            if (input == n1) num1.add(1);
+            else if (input==n2) num1.add(2);
+            else if (input==n3) num1.add(3);
+            else if (input==n4) num1.add(4);
+            else if (input==n5) num1.add(5);
+            else if (input==n6) num1.add(6);
+            else if (input==n7) num1.add(7);
+            else if (input==n8) num1.add(8);
+            else if (input==n9) num1.add(9);
+        }
+
+        else if(num1Input==1){
+
+        }
+    };
 
 }
 
