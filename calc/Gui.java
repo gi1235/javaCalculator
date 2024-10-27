@@ -17,6 +17,8 @@ public class Gui extends JFrame{
     JTextArea text;
 
     Font fontTest = new Font("Simsun 보통", Font.PLAIN, 20);
+    //  https://m.blog.naver.com/10hsb04/221607286384 참조
+
     Gui(){
         setTitle("계산기");
         setSize(500,600);
@@ -44,9 +46,12 @@ public class Gui extends JFrame{
         mainPanel.add("North", panel);
 
         text = new JTextArea();
-        text.setBackground(Color.lightGray);
         text.setFont(fontTest);
-        text.setForeground(Color.BLACK);
+        text.setText("0");
+        text.setForeground(Color.red);
+        text.setBackground(Color.lightGray);
+        
+        
         text.setEnabled(false);
         mainPanel.add(text);
 
@@ -169,10 +174,6 @@ public class Gui extends JFrame{
         }
 
         else if(num1Input==0){
-            String outPut="";
-            for(int i=0;i<num1.size();i++) outPut+=num1.get(i);
-            text.setText(outPut);
-            System.out.println(num1.size());
             if (input == n1) num1.add(1);
             else if (input==n2) num1.add(2);
             else if (input==n3) num1.add(3);
@@ -182,6 +183,9 @@ public class Gui extends JFrame{
             else if (input==n7) num1.add(7);
             else if (input==n8) num1.add(8);
             else if (input==n9) num1.add(9);
+            String outPut="";
+            for(int i=0;i<num1.size();i++) outPut+=num1.get(i);
+            text.setText(outPut);
         }
 
         else if(num1Input==1){
