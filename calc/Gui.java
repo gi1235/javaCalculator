@@ -5,7 +5,6 @@ import javax.swing.*;
 
 
 public class Gui extends JFrame{
-    String result="";
     String inequality="";
     ArrayList<Integer> num1 = new ArrayList<>();
     ArrayList<Integer> num2 = new ArrayList<>();
@@ -125,7 +124,7 @@ public class Gui extends JFrame{
         n3 = new JButton("3");
         panel.add(setWhite(n3));
 
-        JButton plus = new JButton("+");
+        plus = new JButton("+");
         panel.add(setGray(plus));
 
         JButton plusMinus = new JButton("+/-");
@@ -164,16 +163,24 @@ public class Gui extends JFrame{
     ActionListener listenerButton = e ->{
         Object input = e.getSource();
 
-        
-
         if (input==equal) {
             num1Input=1;
-            for(int i=0;i<num1.size();i++) result+=num1.get(i);
-            text.setText(result);
+            String outPut="";
+            for(int i=0;i<num1.size();i++) outPut+=num1.get(i);
+            outPut+=inequality;
+            for(int i=0;i<num2.size();i++) outPut+=num2.get(i);
+            outPut+=" = ";
+            outPut+=math(num1,num2,inequality);
+            text.setText(outPut);
         }
 
-        else if(input==plus && num1Input ==1){
+        else if(input==plus){
+            num1Input=1;
             inequality="+";
+            String outPut="";
+            for(int i=0;i<num1.size();i++) outPut+=num1.get(i);
+            outPut+=inequality;
+            text.setText(outPut);
         }
 
         else if(num1Input==0){
@@ -191,10 +198,38 @@ public class Gui extends JFrame{
             text.setText(outPut);
         }
 
-        else if(num1Input==1){
+        else if(num1Input == 1){
+            if (input == n1) num2.add(1);
+            else if (input==n2) num2.add(2);
+            else if (input==n3) num2.add(3);
+            else if (input==n4) num2.add(4);
+            else if (input==n5) num2.add(5);
+            else if (input==n6) num2.add(6);
+            else if (input==n7) num2.add(7);
+            else if (input==n8) num2.add(8);
+            else if (input==n9) num2.add(9);
 
+            String outPut="";
+            for(int i=0;i<num1.size();i++) outPut+=num1.get(i);
+            outPut+=inequality;
+            for(int i=0;i<num2.size();i++) outPut+=num2.get(i);
+            text.setText(outPut);
         }
+
     };
+
+    int  math(ArrayList<Integer> num1, ArrayList<Integer> num2, String asdf){
+        int result;
+        String left = "";
+        String right = "";
+        for(int i=0;i<num1.size();i++) left+=num1.get(i);
+        for(int i=0;i<num2.size();i++) right+=num2.get(i);
+        if(asdf == "+"){
+            result = Integer.valueOf(left)+Integer.valueOf(right);
+            return result;
+        }
+        return -1;
+    }
 
 }
 
