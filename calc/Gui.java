@@ -11,7 +11,7 @@ public class Gui extends JFrame{
     int num1Input = 0;
 
     JButton n0,n1,n2,n3,n4,n5,n6,n7,n8,n9;
-    JButton equal, plus, minus;
+    JButton equal, plus, minus, division;
 
     JTextArea text;
 
@@ -81,7 +81,7 @@ public class Gui extends JFrame{
         JButton root = new JButton("√x");
         panel.add(setGray(root));
 
-        JButton division = new JButton("÷");
+        division = new JButton("÷");
         panel.add(setGray(division));
 
         n7 = new JButton("7");
@@ -192,6 +192,15 @@ public class Gui extends JFrame{
             text.setText(outPut);
         }
 
+        else if(input == division){
+            num1Input=1;
+            inequality="÷";
+            String outPut="";
+            for(int i=0;i<num1.size();i++) outPut+=num1.get(i);
+            outPut+=inequality;
+            text.setText(outPut);
+        }
+
         else if(num1Input==0){
             if (input == n1) num1.add(1);
             else if (input==n2) num1.add(2);
@@ -228,21 +237,26 @@ public class Gui extends JFrame{
 
     };
 
-    int  math(ArrayList<Integer> num1, ArrayList<Integer> num2, String inequality){
-        int result;
+    String  math(ArrayList<Integer> num1, ArrayList<Integer> num2, String inequality){
+        String result="";
         String left = "";
         String right = "";
         for(int i=0;i<num1.size();i++) left+=num1.get(i);
         for(int i=0;i<num2.size();i++) right+=num2.get(i);
         if(inequality == "+"){
-            result = Integer.valueOf(left)+Integer.valueOf(right);
+            result += Integer.parseInt(left) + Integer.parseInt(right);
             return result;
         }
         else if(inequality =="-"){
-            result = Integer.valueOf(left)-Integer.valueOf(right);
+            result += Integer.parseInt(left) - Integer.parseInt(right);
             return result;
         }
-        return -1;
+
+        else if (inequality == "÷"){
+            result += Float.parseFloat(left) /  Float.parseFloat(right);
+            return result;
+        }
+        return "0";
     }
 
 }
