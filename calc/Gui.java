@@ -11,7 +11,7 @@ public class Gui extends JFrame{
     int num1Input = 0;
 
     JButton n0,n1,n2,n3,n4,n5,n6,n7,n8,n9;
-    JButton equal, plus, minus, division;
+    JButton equal, plus, minus, division, squared;
 
     JTextArea text;
 
@@ -75,7 +75,7 @@ public class Gui extends JFrame{
         JButton reciprocal = new JButton("1/x");
         panel.add(setGray(reciprocal));
 
-        JButton squared = new JButton("x^2");
+        squared = new JButton("x^2");
         panel.add(setGray(squared));
 
         JButton root = new JButton("√x");
@@ -201,6 +201,16 @@ public class Gui extends JFrame{
             text.setText(outPut);
         }
 
+        else if (input==squared){
+            inequality="^2";
+            String outPut="";
+            for(int i=0;i<num1.size();i++) outPut+=num1.get(i);
+            outPut+=inequality;
+            outPut+=" = ";
+            outPut+=math(num1, num2, inequality);
+            text.setText(outPut);
+        }
+
         else if(num1Input==0){
             if (input == n1) num1.add(1);
             else if (input==n2) num1.add(2);
@@ -254,6 +264,11 @@ public class Gui extends JFrame{
 
         else if (inequality == "÷"){
             result += Float.parseFloat(left) /  Float.parseFloat(right);
+            return result;
+        }
+
+        else if( inequality == "^2"){
+            result += Integer.parseInt(left) * Integer.parseInt(left);
             return result;
         }
         return "0";
