@@ -6,13 +6,13 @@ import javax.swing.*;
 
 public class Gui extends JFrame{
     String result="";
+    String inequality="";
     ArrayList<Integer> num1 = new ArrayList<>();
     ArrayList<Integer> num2 = new ArrayList<>();
+    int num1Input = 0;
 
     JButton n0,n1,n2,n3,n4,n5,n6,n7,n8,n9;
-    JButton equal;
-
-    int num1Input = 0;
+    JButton equal, plus;
 
     JTextArea text;
 
@@ -23,7 +23,6 @@ public class Gui extends JFrame{
         setTitle("계산기");
         setSize(500,600);
         setLayout(new GridLayout(3,0));
-
 
         north();
         center();
@@ -48,10 +47,10 @@ public class Gui extends JFrame{
         text = new JTextArea();
         text.setFont(fontTest);
         text.setText("0");
-        text.setForeground(Color.red);
+        text.setForeground(getForeground());
+        text.setDisabledTextColor(Color.black);
+        //  chatgpt사용 setEnabled함수를 사용하여 setForeground 함수 사용 불가능(색깔 고정) 그러나 setDisabledTextColor함수로 변환 가능
         text.setBackground(Color.lightGray);
-        
-        
         text.setEnabled(false);
         mainPanel.add(text);
 
@@ -171,6 +170,10 @@ public class Gui extends JFrame{
             num1Input=1;
             for(int i=0;i<num1.size();i++) result+=num1.get(i);
             text.setText(result);
+        }
+
+        else if(input==plus && num1Input ==1){
+            inequality="+";
         }
 
         else if(num1Input==0){
