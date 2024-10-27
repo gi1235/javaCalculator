@@ -11,7 +11,7 @@ public class Gui extends JFrame{
     int num1Input = 0;
 
     JButton n0,n1,n2,n3,n4,n5,n6,n7,n8,n9;
-    JButton equal, plus;
+    JButton equal, plus, minus;
 
     JTextArea text;
 
@@ -112,7 +112,7 @@ public class Gui extends JFrame{
         n6 = new JButton("6");
         panel.add(setWhite(n6));
 
-        JButton minus = new JButton("-");
+        minus = new JButton("-");
         panel.add(setGray(minus));
 
         n1 = new JButton("1");
@@ -183,6 +183,15 @@ public class Gui extends JFrame{
             text.setText(outPut);
         }
 
+        else if (input == minus){
+            num1Input=1;
+            inequality="-";
+            String outPut="";
+            for(int i=0;i<num1.size();i++) outPut+=num1.get(i);
+            outPut+=inequality;
+            text.setText(outPut);
+        }
+
         else if(num1Input==0){
             if (input == n1) num1.add(1);
             else if (input==n2) num1.add(2);
@@ -193,6 +202,7 @@ public class Gui extends JFrame{
             else if (input==n7) num1.add(7);
             else if (input==n8) num1.add(8);
             else if (input==n9) num1.add(9);
+            else if (input==n0) num1.add(0);
             String outPut="";
             for(int i=0;i<num1.size();i++) outPut+=num1.get(i);
             text.setText(outPut);
@@ -207,7 +217,7 @@ public class Gui extends JFrame{
             else if (input==n6) num2.add(6);
             else if (input==n7) num2.add(7);
             else if (input==n8) num2.add(8);
-            else if (input==n9) num2.add(9);
+            else if (input==n0) num2.add(0);
 
             String outPut="";
             for(int i=0;i<num1.size();i++) outPut+=num1.get(i);
@@ -218,14 +228,18 @@ public class Gui extends JFrame{
 
     };
 
-    int  math(ArrayList<Integer> num1, ArrayList<Integer> num2, String asdf){
+    int  math(ArrayList<Integer> num1, ArrayList<Integer> num2, String inequality){
         int result;
         String left = "";
         String right = "";
         for(int i=0;i<num1.size();i++) left+=num1.get(i);
         for(int i=0;i<num2.size();i++) right+=num2.get(i);
-        if(asdf == "+"){
+        if(inequality == "+"){
             result = Integer.valueOf(left)+Integer.valueOf(right);
+            return result;
+        }
+        else if(inequality =="-"){
+            result = Integer.valueOf(left)-Integer.valueOf(right);
             return result;
         }
         return -1;
