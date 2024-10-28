@@ -165,9 +165,10 @@ public class Gui extends JFrame{
     ActionListener listenerButton = e ->{
         Object input = e.getSource();
         if (input==equal) {
+            if(num1.isEmpty())  num1.add(0);
+            if(num2.isEmpty())  num2.add(0);
             leftOutput();
-            output+=inequality;
-            for(int i=0;i<num2.size();i++) output+=num2.get(i);
+            rightOutput();
             output+=" = ";
             output+=math(num1,num2,inequality);
             text.setText(output);
@@ -207,14 +208,10 @@ public class Gui extends JFrame{
         }
 
         else if (input==clearEntry){
-            output="";
             if (num1Input==1){
                 num2 = new ArrayList<>();
-                for(int i=0;i<num1.size();i++) output+=num1.get(i);
-                output+=inequality;
-                if(num2.isEmpty()){
-                    output+=0;
-                }
+                leftOutput();
+                rightOutput();
                 text.setText(output);
             }
             else{
@@ -235,15 +232,12 @@ public class Gui extends JFrame{
             if(num1Input==1 && !num2.isEmpty()){
                 num2.remove(num2.size()-1);
                 leftOutput();
-                output+=inequality;
-                for(int i=0;i<num2.size();i++) output+=num2.get(i);
+                rightOutput();
                 text.setText(output);
             }
             else if(num1Input==0 && !num1.isEmpty()){
                 num1.remove(num1.size()-1);
                 leftOutput();
-                if(num1.isEmpty())  text.setText("0");
-                else    text.setText(output);
             }
         }
 
@@ -274,8 +268,7 @@ public class Gui extends JFrame{
             else if (input==n9) num2.add(9);
             else if (input==n0) num2.add(0);
             leftOutput();
-            output+=inequality;
-            for(int i=0;i<num2.size();i++) output+=num2.get(i);
+            rightOutput();
             text.setText(output);
         }
 
@@ -313,6 +306,12 @@ public class Gui extends JFrame{
         output="";
         if (num1.isEmpty())  output+="0";
         for(int i=0;i<num1.size();i++) output+=num1.get(i);
+    }
+
+    void rightOutput(){
+        output+=inequality;
+        if(num2.isEmpty())  output+="0";
+        for(int i=0;i<num2.size();i++) output+=num2.get(i);
     }
     
 
