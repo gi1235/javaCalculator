@@ -178,7 +178,7 @@ public class Gui extends JFrame{
             num1Input=1;
             inequality="+";
             leftOutput();
-            output+=inequality;
+            rightOutput();
             text.setText(output);
         }
 
@@ -186,7 +186,7 @@ public class Gui extends JFrame{
             num1Input=1;
             inequality="-";
             leftOutput();
-            output+=inequality;
+            rightOutput();
             text.setText(output);
         }
 
@@ -194,7 +194,7 @@ public class Gui extends JFrame{
             num1Input=1;
             inequality="÷";
             leftOutput();
-            output+=inequality;
+            rightOutput();
             text.setText(output); 
         }
 
