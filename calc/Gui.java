@@ -165,7 +165,6 @@ public class Gui extends JFrame{
     ActionListener listenerButton = e ->{
         Object input = e.getSource();
         if (input==equal) {
-            num1Input=1;
             leftOutput();
             output+=inequality;
             for(int i=0;i<num2.size();i++) output+=num2.get(i);
@@ -312,7 +311,7 @@ public class Gui extends JFrame{
 
     void leftOutput(){
         output="";
-        if (num1.isEmpty())  num1.add(0);
+        if (num1.isEmpty())  output+="0";
         for(int i=0;i<num1.size();i++) output+=num1.get(i);
     }
     
