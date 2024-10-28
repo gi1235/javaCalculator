@@ -218,6 +218,9 @@ public class Gui extends JFrame{
                 num2 = new ArrayList<>();
                 for(int i=0;i<num1.size();i++) outPut+=num1.get(i);
                 outPut+=inequality;
+                if(num2.isEmpty()){
+                    outPut+=0;
+                }
                 text.setText(outPut);
             }
             else{
