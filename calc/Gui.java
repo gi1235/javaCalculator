@@ -163,7 +163,6 @@ public class Gui extends JFrame{
 
     ActionListener listenerButton = e ->{
         Object input = e.getSource();
-
         if (input==equal) {
             num1Input=1;
             String outPut="";
@@ -177,6 +176,7 @@ public class Gui extends JFrame{
 
         else if(input==plus){
             num1Input=1;
+            if(num1.isEmpty())  num1.add(0);
             inequality="+";
             String outPut="";
             for(int i=0;i<num1.size();i++) outPut+=num1.get(i);
@@ -186,6 +186,7 @@ public class Gui extends JFrame{
 
         else if (input == minus){
             num1Input=1;
+            if(num1.isEmpty())  num1.add(0);
             inequality="-";
             String outPut="";
             for(int i=0;i<num1.size();i++) outPut+=num1.get(i);
@@ -195,6 +196,7 @@ public class Gui extends JFrame{
 
         else if(input == division){
             num1Input=1;
+            if(num1.isEmpty())  num1.add(0);
             inequality="÷";
             String outPut="";
             for(int i=0;i<num1.size();i++) outPut+=num1.get(i);
@@ -204,6 +206,7 @@ public class Gui extends JFrame{
 
         else if (input==squared){
             inequality="^2";
+            if(num1.isEmpty())  num1.add(0);
             String outPut="";
             for(int i=0;i<num1.size();i++) outPut+=num1.get(i);
             outPut+=inequality;
@@ -281,6 +284,7 @@ public class Gui extends JFrame{
             else if (input==n6) num2.add(6);
             else if (input==n7) num2.add(7);
             else if (input==n8) num2.add(8);
+            else if (input==n9) num2.add(9);
             else if (input==n0) num2.add(0);
 
             String outPut="";
