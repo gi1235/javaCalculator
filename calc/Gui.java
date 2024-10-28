@@ -12,7 +12,7 @@ public class Gui extends JFrame{
 
     JButton n0,n1,n2,n3,n4,n5,n6,n7,n8,n9;
     JButton equal, plus, minus, division, squared;
-    JButton clearEntry, clear;
+    JButton clearEntry;
 
     JTextArea text;
 
@@ -67,7 +67,7 @@ public class Gui extends JFrame{
         clearEntry = new JButton("CE");
         panel.add(setGray(clearEntry));
 
-        clear = new JButton("C");
+        JButton clear = new JButton("C");
         panel.add(setGray(clear));
 
         JButton backSpace = new JButton("←");
@@ -224,14 +224,6 @@ public class Gui extends JFrame{
                 num1 = new ArrayList<>();
                 text.setText("0");
             }
-        }
-
-        else if (input == clear){
-            num1Input=0;
-            inequality="";
-            num1 = new ArrayList<>();
-            num2 = new ArrayList<>();
-            text.setText("0");
         }
 
         else if(num1Input==0){
