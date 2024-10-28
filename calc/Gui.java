@@ -6,13 +6,13 @@ import javax.swing.*;
 
 public class Gui extends JFrame{
     String inequality="";
-    ArrayList<String> num1 = new ArrayList<>();
-    ArrayList<String> num2 = new ArrayList<>();
+    ArrayList<Integer> num1 = new ArrayList<>();
+    ArrayList<Integer> num2 = new ArrayList<>();
     int num1Input = 0;
 
     JButton n0,n1,n2,n3,n4,n5,n6,n7,n8,n9;
     JButton equal, plus, minus, division, squared;
-    JButton clearEntry;
+    JButton clearEntry, clear, backSpace;
 
     JTextArea text;
 
@@ -67,10 +67,10 @@ public class Gui extends JFrame{
         clearEntry = new JButton("CE");
         panel.add(setGray(clearEntry));
 
-        JButton clear = new JButton("C");
+        clear = new JButton("C");
         panel.add(setGray(clear));
 
-        JButton backSpace = new JButton("←");
+        backSpace = new JButton("←");
         panel.add(setGray(backSpace));
 
         JButton reciprocal = new JButton("1/x");
@@ -226,32 +226,59 @@ public class Gui extends JFrame{
             }
         }
 
+        else if (input == clear){
+            num1Input=0;
+            inequality="";
+            num1 = new ArrayList<>();
+            num2 = new ArrayList<>();
+            text.setText("0");
+        }
+
+        else if (input == backSpace){
+            if(num1Input==1 && !num2.isEmpty()){
+                String outPut="";
+                num2.remove(num2.size()-1);
+                for(int i=0;i<num1.size();i++) outPut+=num1.get(i);
+                outPut+=inequality;
+                for(int i=0;i<num2.size();i++) outPut+=num2.get(i);
+                text.setText(outPut);
+            }
+            else if(num1Input==0 && !num1.isEmpty()){
+                String outPut="";
+                num1.remove(num1.size()-1);
+                for(int i=0;i<num1.size();i++) outPut+=num1.get(i);
+
+                if(num1.isEmpty())  text.setText("0");
+                else    text.setText(outPut);
+            }
+        }
+
         else if(num1Input==0){
-            if (input == n1) num1.add("1");
-            else if (input==n2) num1.add("2");
-            else if (input==n3) num1.add("3");
-            else if (input==n4) num1.add("4");
-            else if (input==n5) num1.add("5");
-            else if (input==n6) num1.add("6");
-            else if (input==n7) num1.add("7");
-            else if (input==n8) num1.add("8");
-            else if (input==n9) num1.add("9");
-            else if (input==n0) num1.add("0");
+            if (input == n1) num1.add(1);
+            else if (input==n2) num1.add(2);
+            else if (input==n3) num1.add(3);
+            else if (input==n4) num1.add(4);
+            else if (input==n5) num1.add(5);
+            else if (input==n6) num1.add(6);
+            else if (input==n7) num1.add(7);
+            else if (input==n8) num1.add(8);
+            else if (input==n9) num1.add(9);
+            else if (input==n0) num1.add(0);
             String outPut="";
             for(int i=0;i<num1.size();i++) outPut+=num1.get(i);
             text.setText(outPut);
         }
 
         else if(num1Input == 1){
-            if (input == n1) num2.add("1");
-            else if (input==n2) num2.add("2");
-            else if (input==n3) num2.add("3");
-            else if (input==n4) num2.add("4");
-            else if (input==n5) num2.add("5");
-            else if (input==n6) num2.add("6");
-            else if (input==n7) num2.add("7");
-            else if (input==n8) num2.add("8");
-            else if (input==n0) num2.add("9");
+            if (input == n1) num2.add(1);
+            else if (input==n2) num2.add(2);
+            else if (input==n3) num2.add(3);
+            else if (input==n4) num2.add(4);
+            else if (input==n5) num2.add(5);
+            else if (input==n6) num2.add(6);
+            else if (input==n7) num2.add(7);
+            else if (input==n8) num2.add(8);
+            else if (input==n0) num2.add(0);
 
             String outPut="";
             for(int i=0;i<num1.size();i++) outPut+=num1.get(i);
@@ -261,8 +288,9 @@ public class Gui extends JFrame{
         }
 
     };
-    // 실수와 정수 둘다 다루기 위해 문자열로 반환
-    String  math(ArrayList<String> num1, ArrayList<String> num2, String inequality){
+    
+    // 실수와 정수 위해 문자열로 반환
+    String  math(ArrayList<Integer> num1, ArrayList<Integer> num2, String inequality){
         String result="";
         String left = "";
         String right = "";
