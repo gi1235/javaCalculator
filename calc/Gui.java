@@ -5,6 +5,7 @@ import javax.swing.*;
 
 
 public class Gui extends JFrame{
+    String output="";
     String inequality="";
     ArrayList<Integer> num1 = new ArrayList<>();
     ArrayList<Integer> num2 = new ArrayList<>();
@@ -165,66 +166,57 @@ public class Gui extends JFrame{
         Object input = e.getSource();
         if (input==equal) {
             num1Input=1;
-            String outPut="";
-            for(int i=0;i<num1.size();i++) outPut+=num1.get(i);
-            outPut+=inequality;
-            for(int i=0;i<num2.size();i++) outPut+=num2.get(i);
-            outPut+=" = ";
-            outPut+=math(num1,num2,inequality);
-            text.setText(outPut);
+            leftOutput();
+            output+=inequality;
+            for(int i=0;i<num2.size();i++) output+=num2.get(i);
+            output+=" = ";
+            output+=math(num1,num2,inequality);
+            text.setText(output);
         }
 
         else if(input==plus){
             num1Input=1;
-            if(num1.isEmpty())  num1.add(0);
             inequality="+";
-            String outPut="";
-            for(int i=0;i<num1.size();i++) outPut+=num1.get(i);
-            outPut+=inequality;
-            text.setText(outPut);
+            leftOutput();
+            output+=inequality;
+            text.setText(output);
         }
 
         else if (input == minus){
             num1Input=1;
-            if(num1.isEmpty())  num1.add(0);
             inequality="-";
-            String outPut="";
-            for(int i=0;i<num1.size();i++) outPut+=num1.get(i);
-            outPut+=inequality;
-            text.setText(outPut);
+            leftOutput();
+            output+=inequality;
+            text.setText(output);
         }
 
         else if(input == division){
             num1Input=1;
-            if(num1.isEmpty())  num1.add(0);
             inequality="÷";
-            String outPut="";
-            for(int i=0;i<num1.size();i++) outPut+=num1.get(i);
-            outPut+=inequality;
-            text.setText(outPut); 
+            leftOutput();
+            output+=inequality;
+            text.setText(output); 
         }
 
         else if (input==squared){
             inequality="^2";
-            if(num1.isEmpty())  num1.add(0);
-            String outPut="";
-            for(int i=0;i<num1.size();i++) outPut+=num1.get(i);
-            outPut+=inequality;
-            outPut+=" = ";
-            outPut+=math(num1, num2, inequality);
-            text.setText(outPut);
+            leftOutput();
+            output+=inequality;
+            output+=" = ";
+            output+=math(num1, num2, inequality);
+            text.setText(output);
         }
 
         else if (input==clearEntry){
-            String outPut="";
+            output="";
             if (num1Input==1){
                 num2 = new ArrayList<>();
-                for(int i=0;i<num1.size();i++) outPut+=num1.get(i);
-                outPut+=inequality;
+                for(int i=0;i<num1.size();i++) output+=num1.get(i);
+                output+=inequality;
                 if(num2.isEmpty()){
-                    outPut+=0;
+                    output+=0;
                 }
-                text.setText(outPut);
+                text.setText(output);
             }
             else{
                 num1 = new ArrayList<>();
@@ -242,20 +234,17 @@ public class Gui extends JFrame{
 
         else if (input == backSpace){
             if(num1Input==1 && !num2.isEmpty()){
-                String outPut="";
                 num2.remove(num2.size()-1);
-                for(int i=0;i<num1.size();i++) outPut+=num1.get(i);
-                outPut+=inequality;
-                for(int i=0;i<num2.size();i++) outPut+=num2.get(i);
-                text.setText(outPut);
+                leftOutput();
+                output+=inequality;
+                for(int i=0;i<num2.size();i++) output+=num2.get(i);
+                text.setText(output);
             }
             else if(num1Input==0 && !num1.isEmpty()){
-                String outPut="";
                 num1.remove(num1.size()-1);
-                for(int i=0;i<num1.size();i++) outPut+=num1.get(i);
-
+                leftOutput();
                 if(num1.isEmpty())  text.setText("0");
-                else    text.setText(outPut);
+                else    text.setText(output);
             }
         }
 
@@ -270,9 +259,8 @@ public class Gui extends JFrame{
             else if (input==n8) num1.add(8);
             else if (input==n9) num1.add(9);
             else if (input==n0) num1.add(0);
-            String outPut="";
-            for(int i=0;i<num1.size();i++) outPut+=num1.get(i);
-            text.setText(outPut);
+            leftOutput();
+            text.setText(output);
         }
 
         else if(num1Input == 1){
@@ -286,12 +274,10 @@ public class Gui extends JFrame{
             else if (input==n8) num2.add(8);
             else if (input==n9) num2.add(9);
             else if (input==n0) num2.add(0);
-
-            String outPut="";
-            for(int i=0;i<num1.size();i++) outPut+=num1.get(i);
-            outPut+=inequality;
-            for(int i=0;i<num2.size();i++) outPut+=num2.get(i);
-            text.setText(outPut);
+            leftOutput();
+            output+=inequality;
+            for(int i=0;i<num2.size();i++) output+=num2.get(i);
+            text.setText(output);
         }
 
     };
@@ -323,6 +309,13 @@ public class Gui extends JFrame{
         }
         return "0";
     }
+
+    void leftOutput(){
+        output="";
+        if (num1.isEmpty())  num1.add(0);
+        for(int i=0;i<num1.size();i++) output+=num1.get(i);
+    }
+    
 
 }
 
