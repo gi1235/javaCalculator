@@ -7,6 +7,7 @@ import javax.swing.*;
 public class Gui extends JFrame{
     String output="";
     String inequality="";
+    String result="";
     ArrayList<Integer> num1 = new ArrayList<>();
     ArrayList<Integer> num2 = new ArrayList<>();
     int num1Input = 0;
@@ -172,6 +173,8 @@ public class Gui extends JFrame{
             output+=" = ";
             output+=math(num1,num2,inequality);
             text.setText(output);
+            num1 = new ArrayList<>();
+            num1.add(Integer.parseInt(result));
         }
 
         else if(input==plus){
@@ -276,7 +279,7 @@ public class Gui extends JFrame{
     
     // 실수와 정수 위해 문자열로 반환
     String  math(ArrayList<Integer> num1, ArrayList<Integer> num2, String inequality){
-        String result="";
+        result = "";
         String left = "";
         String right = "";
         for(int i=0;i<num1.size();i++) left+=num1.get(i);
