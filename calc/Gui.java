@@ -5,21 +5,24 @@ import javax.swing.*;
 
 
 public class Gui extends JFrame{
+    String result="";
     String output="";
     String inequality="";
-    String result="";
     ArrayList<Integer> num1 = new ArrayList<>();
     ArrayList<Integer> num2 = new ArrayList<>();
     int num1Input = 0;
 
     JButton n0,n1,n2,n3,n4,n5,n6,n7,n8,n9;
-    JButton equal, plus, minus, division, squared;
+    JButton equal, plus, minus, division, squared, reciprocal;
     JButton clearEntry, clear, backSpace;
 
     JTextArea text;
 
+    /*
+     * @see https://m.blog.naver.com/10hsb04/221607286384
+     * 글자의 폰트, 크기, 글꼴 조정
+     */
     Font fontTest = new Font("Simsun 보통", Font.PLAIN, 20);
-    //  https://m.blog.naver.com/10hsb04/221607286384 참조
 
     Gui(){
         setTitle("계산기");
@@ -35,6 +38,11 @@ public class Gui extends JFrame{
 
     }
 
+    /*
+     * 계산기의 윗부분 구현
+     * 
+     * @see chatgpt 를사용 setDisabledTextColor() 함수를 이용하여 변경불가능한 JTextArea 배경색 설정 
+     */
     void north(){
         JPanel mainPanel = new JPanel(new BorderLayout());
         
@@ -51,7 +59,6 @@ public class Gui extends JFrame{
         text.setText("0");
         text.setForeground(getForeground());
         text.setDisabledTextColor(Color.black);
-        //  chatgpt사용 setEnabled함수를 사용하여 setForeground 함수 사용 불가능(색깔 고정) 그러나 setDisabledTextColor함수로 변환 가능
         text.setBackground(Color.lightGray);
         text.setEnabled(false);
         mainPanel.add(text);
@@ -59,6 +66,9 @@ public class Gui extends JFrame{
         add(mainPanel);
     }
 
+    /*
+     * 계산기의 가운데 부분 구현
+     */
     void center(){
         JPanel panel = new JPanel(new GridLayout(0,4,2,2));
         panel.setBackground(Color.lightGray);
@@ -75,7 +85,7 @@ public class Gui extends JFrame{
         backSpace = new JButton("←");
         panel.add(setGray(backSpace));
 
-        JButton reciprocal = new JButton("1/x");
+        reciprocal = new JButton("1/x");
         panel.add(setGray(reciprocal));
 
         squared = new JButton("x^2");
@@ -102,6 +112,9 @@ public class Gui extends JFrame{
         add(panel);
     }
 
+    /*
+     * 계산기의 아랫부분 구현
+     */
     void south(){
         JPanel panel = new JPanel(new GridLayout(0,4,2,2));
         panel.setBackground(Color.lightGray);
@@ -148,7 +161,12 @@ public class Gui extends JFrame{
         add(panel);
     }
 
-
+    /**
+     * 입력된 버튼의 폰트, 배경색, 액션 리스너 추가
+     * 
+     * @param a 버튼을 입력받음
+     * @return  버튼을 반환
+     */
     public JButton setWhite(JButton a){
         a.setFont(fontTest);
         a.setBackground(Color.white);
@@ -156,6 +174,12 @@ public class Gui extends JFrame{
         return a;
     }
 
+    /**
+     * 입력된 버튼의 폰트, 배경색, 액션 리스너 추가
+     * 
+     * @param a 버튼을 입력받음
+     * @return  버튼을 반환
+     */
     public JButton setGray(JButton a){
         a.setFont(fontTest);
         a.setBackground(Color.lightGray);
@@ -163,6 +187,9 @@ public class Gui extends JFrame{
         return a;
     }
 
+    /**
+     * 액션리스너로 각각의 버튼을 누를때 알맞은 작동하도록 설계
+     */
     ActionListener listenerButton = e ->{
         Object input = e.getSource();
         if (input==equal) {
@@ -177,7 +204,7 @@ public class Gui extends JFrame{
             num1.add(Integer.parseInt(result));
         }
 
-        else if(input==plus){
+        else if(input == plus){
             num1Input=1;
             inequality="+";
             leftOutput();
@@ -201,10 +228,21 @@ public class Gui extends JFrame{
             text.setText(output); 
         }
 
-        else if (input==squared){
-            inequality="^2";
+        else if (input == squared){
+            num1Input=1;
+            inequality="^";
+            if(num2.isEmpty()) num2.add(2);
             leftOutput();
-            output+=inequality;
+            rightOutput ();
+            output+=" = ";
+            output+=math(num1, num2, inequality);
+            text.setText(output);
+        }
+
+        else if (input == reciprocal){
+            inequality="1/x";
+            output+="1/";
+            for(int i=0;i<num1.size();i++) output+=num1.get(i);
             output+=" = ";
             output+=math(num1, num2, inequality);
             text.setText(output);
@@ -277,9 +315,16 @@ public class Gui extends JFrame{
 
     };
     
-    // 실수와 정수 위해 문자열로 반환
+    /**
+     * num1 과 num2 를 선택된 부등호를 사용하여 계산
+     * 
+     * @param num1  숫자로된 연결리스트
+     * @param num2  숫자로된 연결리스트
+     * @param inequality    문자열
+     * @return  문자열로 된 계산결과 반환
+     */
     String  math(ArrayList<Integer> num1, ArrayList<Integer> num2, String inequality){
-        result = "";
+        result="";
         String left = "";
         String right = "";
         for(int i=0;i<num1.size();i++) left+=num1.get(i);
@@ -298,25 +343,34 @@ public class Gui extends JFrame{
             return result;
         }
 
-        else if( inequality == "^2"){
+        else if( inequality == "^"){
             result += Integer.parseInt(left) * Integer.parseInt(left);
+            return result;
+        }
+
+        else if(inequality == "1/x"){
+            result += 1/Float.parseFloat(left);
             return result;
         }
         return "0";
     }
 
+    /**
+     * 입력된 num1값을 출력하기 위한 함수
+     */
     void leftOutput(){
         output="";
         if (num1.isEmpty())  output+="0";
         for(int i=0;i<num1.size();i++) output+=num1.get(i);
     }
 
+    /**
+     * 입력된 num2값을 출력해주기 위한 함수
+     */
     void rightOutput(){
         output+=inequality;
         if(num2.isEmpty())  output+="0";
         for(int i=0;i<num2.size();i++) output+=num2.get(i);
     }
-    
-
 }
 
