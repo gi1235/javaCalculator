@@ -13,7 +13,7 @@ public class Gui extends JFrame{
     int num1Input = 0;
 
     JButton n0,n1,n2,n3,n4,n5,n6,n7,n8,n9;
-    JButton equal, plus, minus, division, squared, reciprocal;
+    JButton equal, plus, minus, division, squared, reciprocal, multiply;
     JButton clearEntry, clear, backSpace;
 
     JTextArea text;
@@ -106,7 +106,7 @@ public class Gui extends JFrame{
         n9 = new JButton("9");
         panel.add(setWhite(n9));
 
-        JButton multiply = new JButton("×");
+        multiply = new JButton("×");
         panel.add(setGray(multiply));
 
         add(panel);
@@ -228,6 +228,14 @@ public class Gui extends JFrame{
             text.setText(output); 
         }
 
+        else if(input == multiply){
+            num1Input=1;
+            inequality="*";
+            leftOutput();
+            rightOutput();
+            text.setText(output);
+        }
+
         else if (input == squared){
             num1Input=1;
             inequality="^";
@@ -340,6 +348,10 @@ public class Gui extends JFrame{
 
         else if (inequality == "÷"){
             result += Float.parseFloat(left) /  Float.parseFloat(right);
+            return result;
+        }
+        else if(inequality == "*"){
+            result += Integer.parseInt(left) * Integer.parseInt(right);
             return result;
         }
 
