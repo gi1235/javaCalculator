@@ -249,7 +249,7 @@ public class Gui extends JFrame{
 
         else if (input == reciprocal){
             inequality="1/x";
-            output+="1/";
+            output="1/";
             for(int i=0;i<num1.size();i++) output+=num1.get(i);
             output+=" = ";
             output+=math(num1, num2, inequality);
