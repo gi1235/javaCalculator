@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import javax.swing.*;
 
 
+
 public class Gui extends JFrame{
     String result="";
     String output="";
@@ -13,7 +14,7 @@ public class Gui extends JFrame{
     int num1Input = 0;
 
     JButton n0,n1,n2,n3,n4,n5,n6,n7,n8,n9;
-    JButton equal, plus, minus, division, squared, reciprocal, multiply;
+    JButton equal, plus, minus, division, squared, reciprocal, multiply, root;
     JButton clearEntry, clear, backSpace;
 
     JTextArea text;
@@ -87,7 +88,7 @@ public class Gui extends JFrame{
         squared = new JButton("x^2");
         panel.add(setGray(squared));
 
-        JButton root = new JButton("√x");
+        root = new JButton("√x");
         panel.add(setGray(root));
 
         division = new JButton("÷");
@@ -187,6 +188,7 @@ public class Gui extends JFrame{
      * 액션리스너로 각각의 버튼을 누를때 알맞은 작동하도록 설계
      */
     ActionListener listenerButton = e ->{
+        output="";
         Object input = e.getSource();
         if (input==equal) {
             if(num1.isEmpty())  num1.add(0);
@@ -244,10 +246,23 @@ public class Gui extends JFrame{
         }
 
         else if (input == reciprocal){
-            inequality="1/x";
-            output="1/";
+            num1Input=1;
+            inequality="/";
+            if(num2.isEmpty()) num2.add(1);
+            output=""+num2.get(0);
+            output+=inequality;
             for(int i=0;i<num1.size();i++) output+=num1.get(i);
             output+=" = ";
+            output+=math(num1, num2, inequality);
+            text.setText(output);
+        }
+
+        else if(input == root){
+            output="";
+            num1Input=1;
+            inequality="root";
+            for(int i=0;i<num1.size();i++) output+=num1.get(i);
+            output+="의 제곱근 = ";
             output+=math(num1, num2, inequality);
             text.setText(output);
         }
@@ -322,9 +337,9 @@ public class Gui extends JFrame{
     /**
      * num1 과 num2 를 선택된 부등호를 사용하여 계산
      * 
-     * @param num1  숫자로된 연결리스트
-     * @param num2  숫자로된 연결리스트
-     * @param inequality    문자열
+     * @param num1  숫자로된 연결리스트 첫 숫자
+     * @param num2  숫자로된 연결리스트 두번째 숫자
+     * @param inequality    문자열  
      * @return  문자열로 된 계산결과 반환
      */
     String  math(ArrayList<Integer> num1, ArrayList<Integer> num2, String inequality){
@@ -343,7 +358,7 @@ public class Gui extends JFrame{
         }
 
         else if (inequality == "÷"){
-            result += Float.parseFloat(left) /  Float.parseFloat(right);
+            result += Double.parseDouble(left) /  Double.parseDouble(right);
             return result;
         }
         else if(inequality == "*"){
@@ -356,8 +371,13 @@ public class Gui extends JFrame{
             return result;
         }
 
-        else if(inequality == "1/x"){
+        else if(inequality == "/"){
             result += 1/Float.parseFloat(left);
+            return result;
+        }
+        
+        else if(inequality =="root"){
+            result += Math.sqrt(Double.parseDouble(left));
             return result;
         }
         return "0";
