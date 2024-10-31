@@ -40,8 +40,6 @@ public class Gui extends JFrame{
 
     /*
      * 계산기의 윗부분 구현
-     * 
-     * @see chatgpt 를사용 setDisabledTextColor() 함수를 이용하여 변경불가능한 JTextArea 배경색 설정 
      */
     void north(){
         JPanel mainPanel = new JPanel(new BorderLayout());
@@ -57,10 +55,8 @@ public class Gui extends JFrame{
         text = new JTextArea();
         text.setFont(fontTest);
         text.setText("0");
-        text.setForeground(getForeground());
-        text.setDisabledTextColor(Color.black);
         text.setBackground(Color.lightGray);
-        text.setEnabled(false);
+        text.setEditable(false);
         mainPanel.add(text);
 
         add(mainPanel);
